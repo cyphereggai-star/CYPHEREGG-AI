@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { MessageCircle, X, Send, Bot } from 'lucide-react';
 import { botReply } from '@/lib/aiEngine';
+import { sanitizeText } from '@/lib/sanitize';
+import { useRateLimiter } from '@/hooks/useRateLimiter';
 
 interface Msg {
   id: number;
@@ -31,6 +33,7 @@ export function ChatbotWidget() {
   ]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const streamTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const { check: rateCheck } = useRateLimiter({ max: 10, windowMs: 60_000 });
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -81,13 +84,24 @@ export function ChatbotWidget() {
   const send = (text: string) => {
     const t = text.trim();
     if (!t || typing) return;
-    setMessages((prev) => [...prev, { id: ++mid, from: 'user', text: t }]);
+
+    const rl = rateCheck();
+    if (!rl.allowed) {
+      setMessages((prev) => [
+        ...prev,
+        { id: ++mid, from: 'bot', text: `You're sending messages too quickly. Please wait ${rl.resetIn}s and try again.` },
+      ]);
+      return;
+    }
+
+    const clean = sanitizeText(t, 500);
+    setMessages((prev) => [...prev, { id: ++mid, from: 'user', text: clean }]);
     setInput('');
     setTyping(true);
 
-    const delay = 400 + Math.min(t.length * 10, 700);
+    const delay = 400 + Math.min(clean.length * 10, 700);
     setTimeout(() => {
-      const reply = botReply(t);
+      const reply = botReply(clean);
       streamReply(reply);
     }, delay);
   };

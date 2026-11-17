@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, TrendingUp, Mail, User as UserIcon, Building2, Send, Loader2, Check } from 'lucide-react';
+import { ArrowLeft, TrendingUp, Mail, User as UserIcon, Building as Building2, Send, Loader as Loader2, Check } from 'lucide-react';
 import { PublicNavbar } from '@/components/PublicNavbar';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/Badge';
 import { useRouter } from '@/context/RouterContext';
 import { useToast } from '@/components/ui/Toast';
 import { supabase } from '@/lib/supabase';
+import { sanitizeText, isValidEmail } from '@/lib/sanitize';
 
 const HIGHLIGHTS = [
   { label: 'Active Users', value: 'Growing' },
@@ -25,7 +26,7 @@ export function InvestorsPage() {
 
   const valid =
     form.name.trim().length >= 2 &&
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email) &&
+    isValidEmail(form.email) &&
     form.message.trim().length >= 10;
 
   const submit = async () => {
@@ -35,10 +36,10 @@ export function InvestorsPage() {
     }
     setLoading(true);
     const { error } = await supabase.from('investor_leads').insert({
-      name: form.name.trim(),
-      email: form.email.trim(),
-      company: form.company.trim() || null,
-      message: form.message.trim(),
+      name: sanitizeText(form.name, 200),
+      email: sanitizeText(form.email, 200),
+      company: form.company.trim() ? sanitizeText(form.company, 200) : null,
+      message: sanitizeText(form.message, 2000),
     });
     setLoading(false);
     if (error) {

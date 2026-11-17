@@ -1,24 +1,12 @@
 import { useState, useRef } from 'react';
-import {
-  Copy,
-  Check,
-  Bitcoin,
-  Wallet,
-  Link2,
-  ShieldCheck,
-  Loader2,
-  Zap,
-  ArrowRight,
-  Network,
-  Coins,
-  ScanLine,
-} from 'lucide-react';
+import { Copy, Check, Bitcoin, Wallet, Link2, ShieldCheck, Loader as Loader2, Zap, ArrowRight, Network, Coins, ScanLine } from 'lucide-react';
 import { Modal } from '@/components/ui/Modal';
 import { Button } from '@/components/ui/Button';
 import { useToast } from '@/components/ui/Toast';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from '@/context/RouterContext';
 import { supabase } from '@/lib/supabase';
+import { sanitizeText } from '@/lib/sanitize';
 
 const USDT_WALLET = 'TVYnsnsM4352zvfYiD9MEM79rwMNdf5heR';
 const AMOUNT = 19;
@@ -65,9 +53,9 @@ export function CryptoCheckoutModal({ open, onClose }: CryptoCheckoutModalProps)
         .insert({
           user_id: user?.id,
           user_email: user?.email ?? '',
-          tx_id: txId.trim(),
+          tx_id: sanitizeText(txId.trim(), 200),
           amount: AMOUNT,
-          status: 'verified',
+          status: 'pending',
         });
       if (payError) {
         setVerifying(false);

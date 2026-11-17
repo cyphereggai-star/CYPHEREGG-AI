@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Sparkles, ShieldCheck, Wand2, Loader2, Lightbulb, Share2, Lock } from 'lucide-react';
+import { Sparkles, ShieldCheck, Wand as Wand2, Loader as Loader2, Lightbulb, Share2, Lock } from 'lucide-react';
 import { DashboardLayout } from '@/components/DashboardLayout';
 import { CodePanel } from '@/components/CodePanel';
 import { Button } from '@/components/ui/Button';
@@ -10,6 +10,8 @@ import { useToast } from '@/components/ui/Toast';
 import { useRouter } from '@/context/RouterContext';
 import { useGenerations } from '@/hooks/useGenerations';
 import { generateOutput } from '@/lib/aiEngine';
+import { sanitizeText } from '@/lib/sanitize';
+import { useRateLimiter } from '@/hooks/useRateLimiter';
 import type { GenerationMode, Language } from '@/lib/types';
 
 const LANGUAGES: { id: Language; label: string }[] = [
@@ -52,6 +54,7 @@ export function WorkspacePage() {
   const [running, setRunning] = useState(false);
   const [guestRuns, setGuestRuns] = useState(0);
   const [showSignupPrompt, setShowSignupPrompt] = useState(false);
+  const { check: rateCheck } = useRateLimiter({ max: 10, windowMs: 60_000 });
 
   const isFree = (profile?.tier ?? 'free') === 'free';
   const isGuest = !user;
@@ -71,6 +74,13 @@ export function WorkspacePage() {
       return;
     }
 
+    // Rate limit: max 10 runs per minute
+    const rl = rateCheck();
+    if (!rl.allowed) {
+      toast(`Rate limit reached — try again in ${rl.resetIn}s`, 'error');
+      return;
+    }
+
     // Guest gate: allow 1 free analyze run, then prompt signup
     if (isGuest) {
       if (mode === 'generate' || guestUsedUp) {
@@ -79,9 +89,11 @@ export function WorkspacePage() {
       }
     }
 
+    const cleanPrompt = sanitizeText(prompt.trim(), 2000);
+
     setRunning(true);
     setOutput('');
-    const result = generateOutput({ mode, language, prompt: prompt.trim() });
+    const result = generateOutput({ mode, language, prompt: cleanPrompt });
     const chunks = chunkText(result, 6);
     let acc = '';
     for (const c of chunks) {
@@ -100,7 +112,7 @@ export function WorkspacePage() {
     const { error } = await addGeneration({
       mode,
       language,
-      prompt: prompt.trim(),
+      prompt: cleanPrompt,
       result,
       status: 'completed',
     });

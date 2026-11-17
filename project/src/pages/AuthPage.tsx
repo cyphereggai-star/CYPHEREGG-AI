@@ -6,6 +6,7 @@ import { Logo } from '@/components/ui/Logo';
 import { useRouter } from '@/context/RouterContext';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/components/ui/Toast';
+import { sanitizeText } from '@/lib/sanitize';
 
 type Mode = 'login' | 'signup';
 
@@ -74,7 +75,7 @@ export function AuthPage({ mode }: AuthPageProps) {
 
     setLoading(true);
     const res = isSignup
-      ? await signUp(email, password, fullName.trim())
+      ? await signUp(email.trim(), password, sanitizeText(fullName.trim(), 200))
       : await signIn(email, password);
     setLoading(false);
 

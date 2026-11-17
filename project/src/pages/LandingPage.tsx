@@ -1,10 +1,11 @@
-import { ArrowRight, Cpu, Terminal, ShieldCheck, Zap, Sparkles, Code2, BarChart3, GitBranch } from 'lucide-react';
+import { ArrowRight, Cpu, Terminal, ShieldCheck, Zap, Sparkles, Code as Code2, ChartBar as BarChart3, GitBranch } from 'lucide-react';
 import { PublicNavbar } from '@/components/PublicNavbar';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { useRouter } from '@/context/RouterContext';
 import { useAuth } from '@/context/AuthContext';
+import { SiteFooter } from '@/components/SiteFooter';
 
 const FEATURES = [
   {
@@ -308,38 +309,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-cyber-border py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2 text-sm text-cyber-muted">
-            <span className="h-2 w-2 rounded-full bg-accent-green animate-pulse" />
-            All systems operational
-          </div>
-          <div className="flex items-center gap-5 text-sm text-cyber-muted">
-            <button
-              onClick={() => navigate({ name: 'privacy' })}
-              className="transition-colors hover:text-cyber-text"
-            >
-              Privacy Policy
-            </button>
-            <button
-              onClick={() => navigate({ name: 'terms' })}
-              className="transition-colors hover:text-cyber-text"
-            >
-              Terms of Service
-            </button>
-            <button
-              onClick={() => navigate({ name: 'investors' })}
-              className="transition-colors hover:text-cyber-text"
-            >
-              Investor Relations
-            </button>
-          </div>
-          <p className="text-sm text-cyber-muted">
-            © {new Date().getFullYear()} CypherEgg AI · Built for the future
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
