@@ -45,7 +45,7 @@ export function WorkspacePage() {
   const { user, profile } = useAuth();
   const { toast } = useToast();
   const { navigate } = useRouter();
-  const { addGeneration } = useGenerations();
+ const { generations, addGeneration } = useGenerations();
 
   const [mode, setMode] = useState<GenerationMode>('generate');
   const [language, setLanguage] = useState<Language>('typescript');
@@ -88,7 +88,7 @@ export function WorkspacePage() {
         return;
       }
     }
-
+const { generations, addGeneration } = useGenerations();
     const cleanPrompt = sanitizeText(prompt.trim(), 2000);
 
     setRunning(true);
