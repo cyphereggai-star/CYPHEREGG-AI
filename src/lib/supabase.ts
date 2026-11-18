@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-const FALLBACK_URL = 'https://supabase.co';
+const FALLBACK_URL = 'https://cyphereggai-star-cyp-zz0t.bolt.host';
 const FALLBACK_KEY = 'sb_publishable_BAs_DTqoWYcEqNiOysnBhg_xDeu683k';
 
 const supabaseUrl = (import.meta.env.VITE_SUPABASE_URL as string) || FALLBACK_URL;
