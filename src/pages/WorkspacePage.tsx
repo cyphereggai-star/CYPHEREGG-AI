@@ -88,7 +88,11 @@ export function WorkspacePage() {
         return;
       }
     }
-const { generations, addGeneration } = useGenerations();
+if (!isGuest && isFree && generations.length >= 3) {
+  toast('Free plan limit reached (3 runs). Upgrade to Pro!', 'error');
+  navigate('/billing');
+  return;
+}
     const cleanPrompt = sanitizeText(prompt.trim(), 2000);
 
     setRunning(true);
