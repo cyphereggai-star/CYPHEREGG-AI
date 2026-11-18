@@ -90,11 +90,11 @@ export function WorkspacePage() {
     }
 if (!isGuest && isFree && generations.length >= 3) {
   toast('Free plan limit reached (3 runs). Upgrade to Pro!', 'error');
-  navigate('/billing');
+  
   return;
 }
     const cleanPrompt = sanitizeText(prompt.trim(), 2000);
-
+navigate('/dashboard/billing');
     setRunning(true);
     setOutput('');
     const result = generateOutput({ mode, language, prompt: cleanPrompt });
