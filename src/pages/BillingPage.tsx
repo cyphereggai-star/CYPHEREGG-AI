@@ -26,7 +26,7 @@ import { useRouter } from '@/context/RouterContext';
 import { supabase } from '@/lib/supabase';
 import type { Tier } from '@/lib/types';
 
-const APP_ICON = '/file_00000000037c81f4aed797d83aabc06a copy.png';
+const APP_ICON = '/iogo-cube.png.png';
 
 const PLANS: {
   id: Tier;
