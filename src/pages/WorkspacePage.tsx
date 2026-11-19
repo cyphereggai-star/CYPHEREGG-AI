@@ -269,7 +269,7 @@ navigate('/dashboard/billing');
               className="w-full resize-none rounded-lg border border-cyber-border bg-cyber-bg/60 p-3.5 text-sm text-cyber-text placeholder:text-cyber-muted/60 focus:border-accent-blue/50 focus:outline-none focus:ring-1 focus:ring-accent-blue/30"
             />
             <div className="mt-1.5 flex items-center justify-between">
-              <span className="text-xs text-cyber-muted">{prompt.length}/2000</span>
+              <span className="text-xs text-cyber-muted">{prompt.length}/15000</span>
               {isFree && !isGuest && (
                 <Badge variant="warning">
                   <Sparkles className="h-3 w-3" /> Free plan
@@ -340,6 +340,7 @@ navigate('/dashboard/billing');
             </p>
             <div className="flex items-center gap-3">
               {output && !running && (
+      <> 
                 <button
                   onClick={shareOnX}
                   className="flex items-center gap-1.5 rounded-md border border-cyber-border bg-cyber-panel/50 px-2.5 py-1 text-xs text-cyber-muted transition-all hover:border-accent-blue/40 hover:text-accent-blue"
@@ -354,6 +355,7 @@ navigate('/dashboard/billing');
                   >
                     Download
                   </button>)}
+      </> 
               {running && (
                 <span className="flex items-center gap-1.5 text-xs text-accent-blue">
                   <Loader2 className="h-3.5 w-3.5 animate-spin" /> streaming
