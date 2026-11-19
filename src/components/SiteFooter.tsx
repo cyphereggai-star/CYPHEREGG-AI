@@ -42,7 +42,7 @@ export function SiteFooter() {
             </button>
           </div>
           <p className="text-sm text-cyber-muted">
-            &copy; {new Date().getFullYear()} CypherEgg AI &middot; Built for the future
+            &copy; 2027 CypherEgg AI Labs. Built for the future
           </p>
         </div>
       </footer>
@@ -115,7 +115,7 @@ function PrivacyModal({ open, onClose }: { open: boolean; onClose: () => void })
       onClose={onClose}
       badge={<Badge variant="blue"><ShieldCheck className="h-3 w-3" /> Legal</Badge>}
       title="Privacy Policy"
-      updated="November "
+      updated="November 2027"
     >
       <Section
         icon={<ShieldCheck className="h-4 w-4" />}
@@ -160,7 +160,7 @@ function TermsModal({ open, onClose }: { open: boolean; onClose: () => void }) {
       onClose={onClose}
       badge={<Badge variant="green"><FileText className="h-3 w-3" /> Legal</Badge>}
       title="Terms of Service"
-      updated="November "
+      updated="November 2027"
     >
       <Section
         icon={<FileText className="h-4 w-4" />}
