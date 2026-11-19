@@ -1,4 +1,4 @@
-const ORBITAL_LOGO = '/file_00000000037c81f4aed797d83aabc06a copy.png';
+const ORBITAL_LOGO = '/logo-black.png.png';
 
 export function Logo({
   size = 'md',
