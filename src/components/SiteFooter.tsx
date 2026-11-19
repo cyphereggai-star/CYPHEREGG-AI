@@ -115,7 +115,7 @@ function PrivacyModal({ open, onClose }: { open: boolean; onClose: () => void })
       onClose={onClose}
       badge={<Badge variant="blue"><ShieldCheck className="h-3 w-3" /> Legal</Badge>}
       title="Privacy Policy"
-      updated="November 2026"
+      updated="November "
     >
       <Section
         icon={<ShieldCheck className="h-4 w-4" />}
@@ -160,7 +160,7 @@ function TermsModal({ open, onClose }: { open: boolean; onClose: () => void }) {
       onClose={onClose}
       badge={<Badge variant="green"><FileText className="h-3 w-3" /> Legal</Badge>}
       title="Terms of Service"
-      updated="November 2026"
+      updated="November "
     >
       <Section
         icon={<FileText className="h-4 w-4" />}
