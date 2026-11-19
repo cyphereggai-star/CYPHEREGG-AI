@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/components/ui/Toast';
 import { sanitizeText } from '@/lib/sanitize';
 
-const APP_ICON = '/logo-cude.png.';
+const APP_ICON = '/logo-cude.png.png';
 
 type Mode = 'login' | 'signup';
 
