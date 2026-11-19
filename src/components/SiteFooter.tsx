@@ -39,6 +39,12 @@ export function SiteFooter() {
               className="transition-colors hover:text-cyber-text"
             >
               Investor Relations
+              <a
+  href="mailto:cypheregg.ai@://gmail.com"
+  className="transition-colors hover:text-accent-blue"
+>
+  Report Bug &amp; Feedback
+</a>
             </button>
           </div>
           <p className="text-sm text-cyber-muted">
