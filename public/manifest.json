@@ -1,0 +1,17 @@
+{
+  "name": "CypherEgg AI",
+  "short_name": "CypherEgg AI",
+  "description": "AI Code Generation & Security Auditing Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0C10",
+  "theme_color": "#0B0C10",
+  "icons": [
+    {
+      "src": "/logo-cube.png.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
