@@ -119,7 +119,7 @@ export function ChatbotWidget() {
         <img
           src={ECHO_AVATAR}
           alt="Open Echo support chat"
-          className="h-9 w-9 rounded-lg object-cover"
+         className="h-9 w-9 rounded-full object-cover" 
         />
         <span className="absolute -top-0.5 -right-0.5 h-3 w-3 rounded-full bg-accent-green ring-2 ring-cyber-surface" />
       </button>
@@ -130,7 +130,7 @@ export function ChatbotWidget() {
           {/* header */}
           <div className="flex items-center justify-between border-b border-cyber-border bg-cyber-panel/60 px-4 py-3">
             <div className="flex items-center gap-2.5">
-              <div className="relative h-9 w-9 overflow-hidden rounded-lg border border-accent-blue/30 bg-cyber-bg shadow-glow">
+             <div className="relative h-9 w-9 overflow-hidden rounded-full border border-accent-blue/30 bg-cyber-bg shadow-glow">
                 <img
                   src={ECHO_AVATAR}
                   alt="Echo AI"
