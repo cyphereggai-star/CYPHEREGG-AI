@@ -67,7 +67,51 @@ export function WorkspacePage() {
     const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
     window.open(tweetUrl, '_blank', 'noopener,noreferrer');
   };
+const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const ext = file.name.split('.').pop()?.toLowerCase() || '';
+      if (['pdf', 'docx', 'xlsx', 'xls'].includes(ext)) {
+        const buffer = await file.arrayBuffer();
+        const bytes = new Uint8Array(buffer);
+        let extracted = '';
+        for (let i = 0; i < bytes.length; i++) {
+          const code = bytes[i];
+          if ((code >= 32 && code <= 126) || code === 10 || code === 13) {
+            extracted += String.fromCharCode(code);
+          }
+        }
+        const cleaned = extracted.replace(/[^\x20-\x7E\n\r\t]/g, ' ').replace(/\s{3,}/g, '\n').trim();
+        setPrompt(`File: ${file.name}\n\n${cleaned.slice(0, 14500)}`);
+        toast(`Loaded ${file.name} successfully!`, 'success');
+      } else {
+        const text = await file.text();
+        setPrompt(`File: ${file.name}\n\n${text.slice(0, 14500)}`);
+        toast(`Loaded ${file.name} successfully!`, 'success');
+      }
+    } catch {
+      toast('Could not read this file. Try another format.', 'error');
+    }
+    e.target.value = '';
+  };
 
+  const downloadOutput = () => {
+    if (!output) return;
+    const extMap: Record<string, string> = {
+      python: 'py', javascript: 'js', typescript: 'ts', html: 'html',
+      css: 'css', sql: 'sql', java: 'java', cpp: 'cpp', go: 'go', rust: 'rs', php: 'php'
+    };
+    const ext = mode === 'analyze' ? 'md' : (extMap[language] || 'txt');
+    const blob = new Blob([output], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `cypheregg-${mode}-${Date.now()}.${ext}`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('Downloaded successfully!', 'success');
+  };
   const run = async () => {
     if (!prompt.trim()) {
       toast('Enter a prompt first', 'error');
@@ -198,14 +242,25 @@ navigate('/dashboard/billing');
               </div>
             )}
 
-            <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-cyber-muted">
-              {mode === 'generate' ? 'Describe what to build' : 'Describe what to analyze'}
-            </label>
-            <textarea
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              rows={6}
-              maxLength={2000}
+            <div className="mb-2 flex items-center justify-between gap-2">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-cyber-muted">
+                    {mode === 'generate' ? 'Describe what to build' : 'Describe what to analyze or upload a file'}
+                  </label>
+                  <label className="cursor-pointer rounded-lg border border-accent-blue/40 bg-accent-blue/10 px-2.5 py-1 text-xs font-medium text-accent-blue transition hover:bg-accent-blue/20">
+                    + Upload File (Code / PDF / Word / Excel)
+                    <input
+                      type="file"
+                      accept=".py,.js,.ts,.tsx,.jsx,.html,.css,.sql,.json,.md,.txt,.csv,.java,.cpp,.c,.go,.rs,.php,.pdf,.docx,.xlsx,.xls"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+                <textarea
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  rows={6}
+                  maxLength={15000}
               placeholder={
                 mode === 'generate'
                   ? 'e.g. generate a secure rate limiter using a sliding window…'
@@ -292,7 +347,13 @@ navigate('/dashboard/billing');
                 >
                   <Share2 className="h-3.5 w-3.5" /> Share on X
                 </button>
-              )}
+              <button
+                    onClick={downloadOutput}
+                    className="flex items-center gap-1.5 rounded-md border border-accent-green/40 bg-accent-green/10 px-2.5 py-1 text-xs font-medium text-accent-green transition hover:bg-accent-green/20"
+                    title="Download Result"
+                  >
+                    Download
+                  </button>)}
               {running && (
                 <span className="flex items-center gap-1.5 text-xs text-accent-blue">
                   <Loader2 className="h-3.5 w-3.5 animate-spin" /> streaming
