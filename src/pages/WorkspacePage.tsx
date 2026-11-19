@@ -354,8 +354,9 @@ navigate('/dashboard/billing');
                     title="Download Result"
                   >
                     Download
-                  </button>)}
+                  </button>
       </> 
+      )}
               {running && (
                 <span className="flex items-center gap-1.5 text-xs text-accent-blue">
                   <Loader2 className="h-3.5 w-3.5 animate-spin" /> streaming
