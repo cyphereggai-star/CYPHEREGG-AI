@@ -120,6 +120,9 @@ function Routes() {
     case 'dashboard':
       page = <GuardedDashboard section={route.section} />;
       break;
+     case 'workspace':
+  page = <GuardedDashboard section="workspace" />;
+  break; 
     default:
       page = <LandingPage />;
   }
