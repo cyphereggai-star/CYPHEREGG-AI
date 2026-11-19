@@ -41,7 +41,7 @@ const PLANS: {
     name: 'Free',
     price: 0,
     icon: Sparkles,
-    features: ['10 generations / mo', '3 languages', 'Basic analysis'],
+    features: ['3 generations / mo', '3 languages', 'Basic analysis'],
   },
   {
     id: 'pro',
