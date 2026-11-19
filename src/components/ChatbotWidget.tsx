@@ -4,7 +4,7 @@ import { botReply } from '@/lib/aiEngine';
 import { sanitizeText } from '@/lib/sanitize';
 import { useRateLimiter } from '@/hooks/useRateLimiter';
 
-const ECHO_AVATAR = '/file_00000000775c81f4ad92edb23074e668 copy.png';
+const ECHO_AVATAR = '/logo-black.png.png';
 
 interface Msg {
   id: number;
