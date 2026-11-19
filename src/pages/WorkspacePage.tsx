@@ -137,7 +137,7 @@ if (!isGuest && isFree && generations.length >= 3) {
   
   return;
 }
-    const cleanPrompt = sanitizeText(prompt.trim(), 2000);
+    const cleanPrompt = sanitizeText(prompt.trim(), 15000);
 navigate('/dashboard/billing');
     setRunning(true);
     setOutput('');
@@ -288,6 +288,7 @@ navigate('/dashboard/billing');
             </div>
 
             <Button
+              type='button'
               fullWidth
               size="lg"
               className="mt-4"
