@@ -112,7 +112,8 @@ const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     URL.revokeObjectURL(url);
     toast('Downloaded successfully!', 'success');
   };
-  const run = async () => {
+  const run = async (e?: React.MouseEvent) => {
+  e?.preventDefault();
     if (!prompt.trim()) {
       toast('Enter a prompt first', 'error');
       return;
@@ -293,7 +294,7 @@ navigate('/dashboard/billing');
               size="lg"
               className="mt-4"
               loading={running}
-              onClick={run}
+              onClick={(e) => { e.preventDefault(); run(); }}
               leftIcon={
                 !running ? (
                   mode === 'generate' ? (
