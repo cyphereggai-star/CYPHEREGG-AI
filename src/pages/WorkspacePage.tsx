@@ -230,4 +230,39 @@ export function WorkspacePage() {
               </div>
             </div>
 
-            <button
+         <button
+                    type="button"
+                    onClick={shareOnX}
+                    className="flex items-center gap-1.5 rounded-lg border border-cyber-border bg-cyber-bg px-2.5 py-1.5 text-xs font-medium text-cyber-muted hover:text-cyber-text"
+                  >
+                    <Share2 className="h-3.5 w-3.5" /> Share on X
+                  </button>
+                  <button
+                    type="button"
+                    onClick={downloadOutput}
+                    className="flex items-center gap-1.5 rounded-lg border border-accent-green/50 bg-accent-green/15 px-3 py-1.5 text-xs font-bold text-accent-green transition hover:bg-accent-green/25"
+                  >
+                    <Download className="h-3.5 w-3.5" /> Download
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className="flex-1 overflow-auto rounded-xl border border-cyber-border bg-cyber-bg p-4 font-mono text-sm text-cyber-text">
+              {output ? (
+                <pre className="whitespace-pre-wrap break-words">{output}</pre>
+              ) : (
+                <div className="flex h-full min-h-[260px] flex-col items-center justify-center text-center text-cyber-muted">
+                  <Sparkles className="mb-2 h-8 w-8 opacity-30" />
+                  <p className="text-sm">Your generated code or security report will appear here.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
+  );
+}
+
+export default WorkspacePage;   
