@@ -231,6 +231,31 @@ export function WorkspacePage() {
             </div>
 
          <button
+              type="button"
+              onClick={handleRun}
+              disabled={running}
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-accent-blue px-5 py-3 text-sm font-bold text-cyber-bg shadow-lg shadow-accent-blue/20 transition hover:opacity-90 disabled:opacity-50"
+            >
+              <Play className="h-4 w-4" />
+              {running ? 'Processing...' : mode === 'generate' ? 'Generate Code' : 'Analyze Security'}
+            </button>
+          </div>
+
+          <div className="flex flex-col rounded-2xl border border-cyber-border bg-cyber-panel p-5">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <span className="text-xs font-semibold uppercase tracking-wider text-cyber-muted">
+                {mode === 'analyze' ? 'Security Audit Report' : 'Generated Output'}
+              </span>
+              {output && (
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={copyOutput}
+                    className="flex items-center gap-1.5 rounded-lg border border-cyber-border bg-cyber-bg px-2.5 py-1.5 text-xs font-medium text-cyber-text hover:border-accent-blue"
+                  >
+                    {copied ? <Check className="h-3.5 w-3.5 text-accent-green" /> : <Copy className="h-3.5 w-3.5" />}
+                    {copied ? 'Copied' : 'Copy'}
+                  </button>
                     type="button"
                     onClick={shareOnX}
                     className="flex items-center gap-1.5 rounded-lg border border-cyber-border bg-cyber-bg px-2.5 py-1.5 text-xs font-medium text-cyber-muted hover:text-cyber-text"
