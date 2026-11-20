@@ -28,7 +28,7 @@ export function WorkspacePage() {
   const remaining = isGuest ? 1 : isFree ? Math.max(0, 3 - generations.length) : 9999;
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.target.files?.item(0);
     if (!file) return;
     try {
       const ext = file.name.split('.').pop()?.toLowerCase() || '';
