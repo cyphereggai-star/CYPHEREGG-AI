@@ -344,6 +344,7 @@ navigate('/dashboard/billing');
               {output && !running && (
       <> 
                 <button
+                  type="button"
                   onClick={shareOnX}
                   className="flex items-center gap-1.5 rounded-md border border-cyber-border bg-cyber-panel/50 px-2.5 py-1 text-xs text-cyber-muted transition-all hover:border-accent-blue/40 hover:text-accent-blue"
                   title="Share on X"
@@ -351,6 +352,7 @@ navigate('/dashboard/billing');
                   <Share2 className="h-3.5 w-3.5" /> Share on X
                 </button>
               <button
+                type="button"
                     onClick={downloadOutput}
                     className="flex items-center gap-1.5 rounded-md border border-accent-green/40 bg-accent-green/10 px-2.5 py-1 text-xs font-medium text-accent-green transition hover:bg-accent-green/20"
                     title="Download Result"
