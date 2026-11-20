@@ -171,7 +171,7 @@ export function PricingPage() {
           <p className="mt-4 text-cyber-muted">
             Start free, upgrade when you're ready. Every plan includes the AI
             workspace and security analyzer. Pro is payable in USDT (TRC20);
-            Enterprise uses a simulated checkout.
+            Both Pro and Enterprise plans are payable instantly via USDT (TRC20).
           </p>
         </div>
 
