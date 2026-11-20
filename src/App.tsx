@@ -124,7 +124,9 @@ function Routes() {
   page = <GuardedDashboard section="workspace" />;
   break; 
     default:
-      page = <LandingPage />;
+      page = window.location.hash.includes('undefined')
+        ? <GuardedDashboard section="workspace" />
+        : <LandingPage />;
   }
 
   return <ChatbotHost>{page}</ChatbotHost>;
