@@ -10,7 +10,7 @@ import {
   Mail,
   Calendar,
   Loader2,
-  Bitcoin,
+  Bitcoin, Box,
 } from 'lucide-react';
 import { DashboardLayout } from '@/components/DashboardLayout';
 import { Card } from '@/components/ui/Card';
