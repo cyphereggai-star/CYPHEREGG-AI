@@ -31,7 +31,7 @@ const PLANS: Plan[] = [
     tagline: 'Explore the workspace',
     icon: Sparkles,
     features: [
-      '10 generations / month',
+      '3 generations / month',
       'Code generation (3 languages)',
       'Basic security analysis',
       '7-day history',
@@ -71,6 +71,7 @@ const PLANS: Plan[] = [
       'SLA guarantee',
     ],
     cta: 'Go Enterprise',
+    crypto: true,
   },
 ];
 
