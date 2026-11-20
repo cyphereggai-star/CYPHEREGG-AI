@@ -230,7 +230,7 @@ export function BillingPage() {
                         fullWidth
                         size="sm"
                         variant="primary"
-                        onClick={() => handlePlanAction(p.id, true)}
+                        onClick={() => window.open(p.id === 'pro' ? 'https://nowpayments.io' : 'https://nowpayments.io', '_blank')}
                         leftIcon={<Bitcoin className="h-4 w-4" />}
                       >
                         Pay with USDT
