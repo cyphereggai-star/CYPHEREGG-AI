@@ -260,7 +260,7 @@ export function BillingPage() {
           <Card className="mt-5 p-5">
             <div className="flex items-start gap-3">
               <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-accent-blue/30">
-                <img src={APP_ICON} alt="CypherEgg AI" className="h-full w-full object-cover" />
+               <Box className="h-5 w-5 text-accent-blue" /> 
               </div>
               <div>
                 <p className="text-sm font-medium text-cyber-text">
